@@ -1,4 +1,4 @@
-# Vue 3 + Typescript + Vite
+# Vue 
 
 # 简介
 TODO: 简要介绍你的项目。通过此节说明此项目的目标或动机。
