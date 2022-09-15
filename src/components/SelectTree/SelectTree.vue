@@ -53,8 +53,6 @@ export default {
     // 初始化值
     initHandle() {
       this.$nextTick(() => {
-        this.$refs['multiSelect'].toggleMenu(); //默认展开选项
-
         let scrollWrap = document.querySelectorAll('.el-scrollbar .el-select-dropdown__wrap')[0];
         let scrollBar = document.querySelectorAll('.el-scrollbar .el-scrollbar__bar');
         scrollWrap.style.cssText = 'margin: 0px; max-height: none; overflow: hidden;';
@@ -65,7 +63,6 @@ export default {
     getTagTreeList() {
       treeListWithUserNumOrg({ id: '0' }).then((res) => {
         this.rootDate = res;
-        console.log(res);
         this.getTreeData(this.rootDate);
       });
     },
@@ -176,7 +173,7 @@ export default {
         }
       }
     },
-    filterText: lodash.debounce(function (val) {
+    filterText: lodash.debounce(function(val) {
       if (val) {
         this.getOrgWithName(val);
       } else {

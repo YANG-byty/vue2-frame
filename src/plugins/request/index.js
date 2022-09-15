@@ -74,65 +74,65 @@ service.interceptors.response.use(
     } else {
       // 有 code 代表这是一个后端接口 可以进行进一步的判断
       switch (code) {
-      case 200:
-        // [ 示例 ] code === 0 代表没有错误
-        return dataAxios.data;
-      case '401':
-        // [ 示例 ] 其它和后台约定的 code
+        case 200:
+          // [ 示例 ] code === 0 代表没有错误
+          return dataAxios.data;
+        case '401':
+          // [ 示例 ] 其它和后台约定的 code
 
-        errorCreate(`[ code: xxx ] ${dataAxios.msg}`);
-        break;
-      default:
-        // 不是正确的 code
-        let message = dataAxios.msg.indexOf('采集失败');
-        if (message !== -1) {
-          errorCreate('采集失败，数据库不匹配');
-        } else {
-          errorCreate(`${dataAxios.msg}`);
-        }
-        break;
+          errorCreate(`[ code: xxx ] ${dataAxios.msg}`);
+          break;
+        default:
+          // 不是正确的 code
+          let message = dataAxios.msg.indexOf('采集失败');
+          if (message !== -1) {
+            errorCreate('采集失败，数据库不匹配');
+          } else {
+            errorCreate(`${dataAxios.msg}`);
+          }
+          break;
       }
     }
   },
   (error) => {
     if (error && error.response) {
       switch (error.response.status) {
-      case 400:
-        error.message = '请求错误';
-        break;
-      case 401:
-        clearLoginInfo();
-        location.href = authLogin();
-        break;
-      case 403:
-        error.message = '拒绝访问';
-        break;
-      case 404:
-        error.message = `请求地址出错: ${error.response.config.url}`;
-        break;
-      case 408:
-        error.message = '请求超时';
-        break;
-      case 500:
-        error.message = '服务器内部错误';
-        break;
-      case 501:
-        error.message = '服务未实现';
-        break;
-      case 502:
-        error.message = '网关错误';
-        break;
-      case 503:
-        error.message = '服务不可用';
-        break;
-      case 504:
-        error.message = '网关超时';
-        break;
-      case 505:
-        error.message = 'HTTP版本不受支持';
-        break;
-      default:
-        break;
+        case 400:
+          error.message = '请求错误';
+          break;
+        case 401:
+          clearLoginInfo();
+          location.href = authLogin();
+          break;
+        case 403:
+          error.message = '拒绝访问';
+          break;
+        case 404:
+          error.message = `请求地址出错: ${error.response.config.url}`;
+          break;
+        case 408:
+          error.message = '请求超时';
+          break;
+        case 500:
+          error.message = '服务器内部错误';
+          break;
+        case 501:
+          error.message = '服务未实现';
+          break;
+        case 502:
+          error.message = '网关错误';
+          break;
+        case 503:
+          error.message = '服务不可用';
+          break;
+        case 504:
+          error.message = '网关超时';
+          break;
+        case 505:
+          error.message = 'HTTP版本不受支持';
+          break;
+        default:
+          break;
       }
     }
     errorLog(error);

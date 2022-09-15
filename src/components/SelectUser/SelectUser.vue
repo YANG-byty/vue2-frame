@@ -7,10 +7,11 @@
               <div class="personGroupBoxL">
                 <Form :label-width="90">
                   <SelectTree :searchTitle="searchTitle" v-model="visible" ref="SelectTree" @getValue="getValue" @getSearchTitle="getSearchTitle" @closeDataTree='closeDataTree' class="mb10" style="width:400px"/>
+                  </FormItem>
                 </Form>
                 <div>
                   <div class='personListBox'>
-                    <div class="personList" v-for="(item,index) in personList" :key="index"  @click="setMen(item)">
+                    <div class="personList" v-for="item in personList" :key="item.name"  @click="setMen(item)">
                     <div class="item">
                       <div class="img-box">
                         <img src="@/assets/images/profile.jpg" alt="" />
@@ -19,7 +20,7 @@
                             <span class="name">{{ item.nickName }}</span>
                             <span class="mr10"></span>
                           </p>
-                          <!-- <p class="org">{{ item.phone }}</p> -->
+                          <p class="org">{{ item.phone }}</p>
                         </div>
                       </div>
                       <Icon type="ios-checkmark" size="24" v-if="item.checked" />
@@ -32,7 +33,7 @@
                 <div>
                   <h4>授权用户</h4>
                   <div class='personListBox'>
-                    <div class="personList" v-for="(item, index) in groupsList" :key="index">
+                    <div class="personList" v-for="(item, index) in groupsList" :key="item.name">
                     <div class="item">
                       <div class="img-box">
                         <img src="@/assets/images/profile.jpg" alt="" />
@@ -40,7 +41,7 @@
                           <p>
                             <span class="name">{{ item.nickName }}</span>
                           </p>
-                          <!-- <p class="org">{{ item.phone }}</p> -->
+                          <p class="org">{{ item.phone }}</p>
                         </div>
                       </div>
                       <div class="btn">
@@ -70,13 +71,10 @@ export default {
     SelectTree
   },
   props: {
-    roleId: {
-      type: String
-    },
     currentTitle: {
       type: String
     },
-    value: {
+    value:{
       type: Boolean
     },
     userList: {
@@ -90,28 +88,28 @@ export default {
   },
   data () {
     return {
-      visible: false,
+      visible:false,
       title: this.currentTitle,
       personList: [],
       groupsList: this.userList,
       addGroupFormLoading: false,
-      searchTitle: '2'
+      searchTitle: '2',
     };
   },
   watch: {
-    userList(val) {
-      this.groupsList = val;
-    },
     currentTitle(val) {
       this.title = val;
     },
-    value(val) {
-      this.visible = val;
+    userList(val) {
+      this.groupsList = val;
     },
-    visible(val) {
-      this.$emit('input', val);
-      if (!val) {
-        this.resetData();
+    value(val){
+      this.visible = val
+    },
+    visible(val){
+      this.$emit('input',val)
+      if(!val){
+        this.resetData()
       }
     }
   },
@@ -165,12 +163,6 @@ export default {
       getOrgUsers({ orgId: val }).then((res) => {
         if (res) {
           this.personList = res;
-          this.personList.map(item => {
-            let index = this.userList.findIndex(value => {
-              return value.userId == item.userId;
-            });
-            this.$set(item, 'checked', index >= 0);
-          });
         } else {
           this.$Message.error('该组织下暂无人员');
         }
@@ -184,21 +176,20 @@ export default {
       });
       this.groupsList = this.groupsList.filter((list) => list.userId !== item.userId);
     },
-    resetData() {
+    resetData(){
       this.searchTitle = '2';
-      this.closeDataTree();
-      this.$refs.SelectTree.filterText = '';
-      this.$refs.SelectTree.valueTitle = '';
-      this.groupsList = [];
+      this.closeDataTree()
+      this.$refs.SelectTree.filterText = ''
+       this.$refs.SelectTree.valueTitle = ''
+      this.groupsList= []
     },
     closeDrawer() {
-      this.visible = false;
-      this.$emit('resetDataList', []);
+      this.visible = false
     },
     // 确定选中的人员
     addGroupUserSubmit() {
-      this.$emit('setDataList', this.groupsList);
-      this.visible = false;
+     this.$emit('setDataList',this.groupsList)
+     this.visible = false
     }
   }
 };

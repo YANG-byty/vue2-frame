@@ -6,29 +6,20 @@
           <div class="info-title">
             <span class="left-size">评价对象</span>
           </div>
-          <div class="common-table table">
-            <Table :columns="columns" :data="nodeLogInfo" @on-row-click="nodeDetailFn">
-              <template slot-scope="{ row, index }" slot="processId">
-                <span class="text-decoration">
-                  <span>{{ row.processId }}</span>
-                </span>
-              </template>
-              <template slot-scope="{ row, index }" slot="statusHide">
-                <span :class="row.class">{{ row.statusHide }}</span>
-              </template>
-            </Table>
+          <div class="common-table">
+            <Table :columns="columns" :data="dataList"> </Table>
           </div>
-          <!-- <div class="common-page align-right">
+          <div class="common-page align-right">
             <Page :total="100" show-sizer show-elevator show-total />
-          </div> -->
+          </div>
         </Col>
         <Col span="7">
           <div class="info-title">
             <span class="left-size">流程详情</span>
           </div>
           <Card :bordered="false" dis-hover class="process-log">
-            <div class="step-box" v-if="nodeLogInfo.length > 0">
-              <div v-bind:class="'item ' + item.class" v-for="(item, index) in nodeLogInfo[activeIndex].nodeList" :key="index">
+            <div class="step-box">
+              <div :class="'item ' + item.class" v-for="item in logInfo">
                 <div class="round"><i class="iconfont"></i></div>
                 <div class="cont">
                   <!--头部-->
@@ -75,62 +66,145 @@
 </template>
 
 <script>
-import { iconEnumList, auditProcessEnumList } from '@/libs/enum';
-
+import { iconEnumList } from '@/libs/enum';
 export default {
-  props: ['value', 'nodeLogInfo'],
+  props: ['value'],
   data() {
     return {
-      auditProcessEnumList: auditProcessEnumList,
       visible: false,
-      columns: [
+      logInfo: [
         {
-          title: '送审时间',
-          key: 'createTime',
-          align: 'center'
+          action: '',
+          actionExt: '',
+          actionRemark: '',
+          deal: '已结束',
+          icon: 1,
+          nodeName: '已结束',
+          operateTime: '',
+          operationName: '',
+          sendList: ''
         },
         {
-          title: '送审编号',
-          slot: 'processId',
-          minWidth: 200,
-          align: 'center'
+          action: '',
+          actionExt: '',
+          actionRemark: '',
+          deal: '',
+          icon: 1,
+          nodeName: '抄送节点',
+          operateTime: '',
+          operationName: '',
+          sendList: [{ ifRead: 1, operationName: '张笑保' }]
         },
         {
-          title: '审核流程',
-          align: 'center',
-          slot: 'statusHide'
+          action: '同意',
+          actionExt: 'agree',
+          actionRemark: '',
+          deal: '已处理',
+          icon: 1,
+          nodeName: '领导审批',
+          operateTime: '2022-04-19 14:18:23',
+          operationName: '张笑保',
+          sendList: ''
         },
         {
-          title: '处理结果',
-          key: 'nodeName',
-          align: 'center'
+          action: '',
+          actionExt: '',
+          actionRemark: '',
+          deal: '提交',
+          icon: 1,
+          nodeName: '提交申请',
+          operateTime: '2022-04-19 14:18:20',
+          operationName: '张笑保',
+          sendList: ''
+        },
+        {
+          action: null,
+          actionExt: null,
+          actionRemark: null,
+          deal: '已撤回',
+          icon: 4,
+          nodeName: '撤回申请',
+          operateTime: null,
+          operationName: '张笑保',
+          sendList: null
+        },
+        {
+          action: null,
+          actionExt: null,
+          actionRemark: null,
+          deal: '已作废',
+          icon: 3,
+          nodeName: '作废申请',
+          operateTime: null,
+          operationName: '张笑保',
+          sendList: null
         }
       ],
-      activeIndex: 0
+      dataList: [
+        {
+          name: '2022年3月9日01',
+          age: '',
+          address: '杭州百图科技有限公司',
+          date: '2016-10-01'
+        },
+        {
+          name: '2022年3月9日01',
+          age: '',
+          address: '杭州百图科技有限公司',
+          date: '2016-10-01'
+        },
+        {
+          name: '2022年3月9日01',
+          age: '',
+          address: '杭州百图科技有限公司',
+          date: '2016-10-01'
+        },
+        {
+          name: '2022年3月9日01',
+          age: '',
+          address: '杭州百图科技有限公司',
+          date: '2016-10-01'
+        }
+      ],
+      columns: [
+        {
+          title: '操作时间',
+          key: 'name',
+          align: 'center'
+        },
+        {
+          title: '操作类型',
+          key: 'age',
+          align: 'center'
+        },
+        {
+          title: '操作用户',
+          key: 'address',
+          align: 'center'
+        },
+        {
+          title: '操作结果',
+          key: 'address',
+          align: 'center'
+        },
+        {
+          title: '操作备注',
+          key: 'address',
+          align: 'center'
+        }
+      ]
     };
   },
-  mounted() {},
-  methods: {
-    nodeDetailFn(data, index) {
-      this.activeIndex = index;
-    }
+  created() {
+    let result = '';
+    this.logInfo = this.logInfo.map((item) => {
+      result = this.enumConversion(iconEnumList, 'value', item.icon, 'class');
+      this.$set(item, 'class', result);
+      return item;
+    });
   },
+  methods: {},
   watch: {
-    nodeLogInfo(val) {
-      if (val.length > 0) {
-        this.logInfo = val.map((item) => {
-          item.nodeName = item.approveStatus ? (item.approveStatus == 'agree' ? '同意' : '拒绝') : null;
-          item.statusHide = this.enumConversion(auditProcessEnumList, 'value', item.instanceStatus, 'label');
-          item.class = this.enumConversion(auditProcessEnumList, 'value', item.instanceStatus, 'class');
-          let result = '';
-          item.nodeList.map((value) => {
-            result = this.enumConversion(iconEnumList, 'value', value.icon, 'class');
-            this.$set(value, 'class', result);
-          });
-          return item;
-        });
-      }
-    },
     value(val) {
       this.visible = val;
     },

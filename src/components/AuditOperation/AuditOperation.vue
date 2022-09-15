@@ -2,22 +2,22 @@
   <div>
     <Drawer title="审核操作" v-model="visible" width="700">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
-        <FormItem label="审核结果：" prop="result">
-          <RadioGroup v-model="formValidate.result" @on-change="handleSelectFn">
-            <Radio label="agree">
+        <FormItem label="审核结果：" prop="name">
+          <RadioGroup v-model="formValidate.phone">
+            <Radio label="apple">
               <span>同意</span>
             </Radio>
-            <Radio label="disagree">
+            <Radio label="android">
               <span>拒绝</span>
             </Radio>
           </RadioGroup>
         </FormItem>
-        <FormItem label="审核备注：">
+        <FormItem label="审核结果：" prop="name">
           <Input
-            v-model="formValidate.remark"
+            v-model="formValidate.value8"
             type="textarea"
             :autosize="{ minRows: 4, maxRows: 8 }"
-            placeholder="请填写审核备注"
+            placeholder="请填写审核结果"
           />
         </FormItem>
       </Form>
@@ -37,40 +37,18 @@ export default {
       visible: false,
       formValidate: {},
       ruleValidate: {
-        result: [{ required: true, message: '审核结果不能为空', trigger: 'change' }]
+        name: [{ required: true, trigger: 'blur' }]
       }
     };
   },
   methods: {
-    handleSelectFn(type) {
-      switch (type) {
-      case 'agree':
-        this.$set(this.formValidate, 'remark', '同意');
-        break;
-      case 'disagree':
-        this.$set(this.formValidate, 'remark', '拒绝');
-        break;
-      }
-    },
     // 保存点击
     handleSave() {
-      this.$refs.formValidate.validate((valid) => {
-        if (valid) {
-          this.$emit('approvalOperation', this.formValidate);
-          this.visible = false;
-          this.resetFn();
-        }
-      });
+      this.visible = false;
     },
     // 取消点击
     handdleCannel() {
       this.visible = false;
-      this.resetFn();
-    },
-    // 重置表单
-    resetFn() {
-      this.$set(this.formValidate, 'result', '');
-      this.$set(this.formValidate, 'remark', '');
     }
   },
   watch: {

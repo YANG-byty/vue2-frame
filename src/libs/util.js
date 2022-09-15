@@ -23,7 +23,7 @@ function tTitle(title = '') {
  * @param {Object} title 标题
  * @param {Object} count 未读消息数提示（可视情况选择使用或不使用）
  */
-util.title = function ({ title, count }) {
+util.title = function({ title, count }) {
   title = tTitle(title);
   // let fullTitle = title ? `${title} - ${Setting.titleSuffix}` : Setting.titleSuffix;
 
@@ -43,9 +43,6 @@ export { requestAnimation };
 // 后去用户id
 export function getUserId() {
   return util.cookies.get('user_id');
-}
-export function getUserName() {
-  return util.cookies.get('authName');
 }
 export function clearLoginInfo() {
   util.cookies.remove('token');
@@ -72,7 +69,7 @@ export const debounce = (that, fn, delay) => {
   }
   const context = that;
   const args = arguments;
-  that.functionTimeOut = setTimeout(function () {
+  that.functionTimeOut = setTimeout(function() {
     fn.apply(context, args);
   }, delay);
 };

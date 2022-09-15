@@ -38,16 +38,6 @@ export function roleDelete(data) {
     data
   });
 }
-
-//授权用户确定
-export function userRoleAdd(data) {
-  return request({
-    url: '/review/manage/userRole/add',
-    method: 'post',
-    data
-  });
-}
-
 //新增用户部门关系
 export function userOrgAdd(data) {
   return request({
@@ -57,19 +47,11 @@ export function userOrgAdd(data) {
   });
 }
 
-//分发部门设置列表
+//新增用户部门关系
 export function userOrgPage(data) {
   return request({
     url: '/review/user/userOrg/page',
     method: 'post',
     data
-  });
-}
-
-//获取用户权限
-export function userMenu(data) {
-  return request({
-    url: '/permission/current/user/menu',
-    method: 'get'
   });
 }

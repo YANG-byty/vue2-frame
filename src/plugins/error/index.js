@@ -1,9 +1,9 @@
-// import store from '@/store';
+import store from '@/store';
 import util from '@/libs/util';
 
 export default {
   install(Vue, options) {
-    Vue.config.errorHandler = function (error, instance, info) {
+    Vue.config.errorHandler = function(error, instance, info) {
       Vue.nextTick(() => {
         // store 追加 log
         // 只在开发模式下打印 log

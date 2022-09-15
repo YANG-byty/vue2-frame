@@ -1,5 +1,3 @@
-import * as requestRefers from '@/api/review';
-
 import SendDing from '@/components/SendDing';
 import OperationLog from '@/components/OperationLog';
 import AuditLog from '@/components/AuditLog';
@@ -9,23 +7,18 @@ import SelectUser from '@/components/SelectUser';
 import SendAudit from '@/components/SendAudit';
 import AddRole from '@/components/AddRole';
 import AddDepartment from '@/components/AddDepartment';
-
 // 催办
 const mixinSendDing = {
   data() {
     return {
-      isSendDing: false,
-      msgType: 1,
-      instanceId: ''
+      isSendDing: false
     };
   },
   components: {
     SendDing
   },
   methods: {
-    handleSendDing(value, id) {
-      this.msgType = value;
-      this.instanceId = id;
+    handleSendDing() {
       this.isSendDing = true;
     }
   }
@@ -34,19 +27,15 @@ const mixinSendDing = {
 const mixinOperationLog = {
   data() {
     return {
-      isOperationLog: false,
-      operationList: []
+      isOperationLog: false
     };
   },
   components: {
     OperationLog
   },
   methods: {
-    handleOperationLog(id) {
+    handleOperationLog() {
       this.isOperationLog = true;
-      requestRefers.getOperationList(id).then((res) => {
-        this.operationList = res;
-      });
     }
   }
 };
@@ -54,18 +43,16 @@ const mixinOperationLog = {
 const mixinAuditLog = {
   data() {
     return {
-      isAuditLog: false,
-      nodeLogInfo: []
+      isAuditLog: false
     };
   },
   components: {
     AuditLog
   },
   methods: {
-    // handleAuditLog(nodeLogInfo) {
-    //   this.nodeLogInfo = nodeLogInfo;
-    //   this.isAuditLog = true;
-    // }
+    handleAuditLog() {
+      this.isAuditLog = true;
+    }
   }
 };
 // 审核操作
@@ -104,24 +91,14 @@ const mixinSelectOrg = {
 const mixinSelectUser = {
   data() {
     return {
-      isSelectUser: false,
-      roleId: '',
-      userList: []
+      isSelectUser: false
     };
   },
   components: {
     SelectUser
   },
   methods: {
-    handleSelectUser(row) {
-      this.roleId = row.id;
-      this.userList = row.userList;
-      if (this.userList.length > 0) {
-        this.userList.map((item) => {
-          this.$set(item, 'nickName', item.userName);
-          this.$set(item, 'userId', item.uid);
-        });
-      }
+    handleSelectUser() {
       this.isSelectUser = true;
     }
   }
@@ -131,16 +108,14 @@ const mixinSelectUser = {
 const mixinSendAudit = {
   data() {
     return {
-      isSendAudit: false,
-      id: ''
+      isSendAudit: false
     };
   },
   components: {
     SendAudit
   },
   methods: {
-    handleSendAudit(row) {
-      this.id = row.id;
+    handleSendAudit() {
       this.isSendAudit = true;
     }
   }
@@ -193,7 +168,6 @@ const mixinAddDepartment = {
     }
   }
 };
-
 export {
   mixinSendDing,
   mixinOperationLog,

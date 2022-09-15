@@ -1,14 +1,14 @@
 {
-  "name": "bt-review",
+  "name": "iview-admin-pro-template",
   "version": "2.6.0",
-  "private": false,
+  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
     "dev": "npm run serve",
-    "build:dev": "vue-cli-service build --mode development",
-    "build:test": "vue-cli-service build --mode nomock",
-    "build:prod": "vue-cli-service build --mode production",
+    "build": "vue-cli-service build",
+    "build:nomock": "vue-cli-service build --mode nomock",
+    "build:travis": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"
   },

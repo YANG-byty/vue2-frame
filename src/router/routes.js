@@ -24,7 +24,7 @@ const frameOut = [
         meta: {
           title: '审查任务管理'
         },
-        component: () => import('@/pages/review-task')
+        component: () => import('@/pages/reviewTask')
       },
       {
         path: '/reviewTask/detail',
@@ -32,7 +32,7 @@ const frameOut = [
         meta: {
           title: '审查任务管理'
         },
-        component: () => import('@/pages/review-task/detail')
+        component: () => import('@/pages/reviewTask/detail')
       },
       {
         path: '/reviewObject',
@@ -40,7 +40,7 @@ const frameOut = [
         meta: {
           title: '分发审查对象'
         },
-        component: () => import('@/pages/review-object')
+        component: () => import('@/pages/reviewObject')
       },
       {
         path: '/reviewObject/detail',
@@ -48,7 +48,7 @@ const frameOut = [
         meta: {
           title: '分发审查对象'
         },
-        component: () => import('@/pages/review-object/detail')
+        component: () => import('@/pages/reviewObject/detail')
       },
       {
         path: '/reviewOpinion',
@@ -56,7 +56,7 @@ const frameOut = [
         meta: {
           title: '填写审查意见'
         },
-        component: () => import('@/pages/review-opinion')
+        component: () => import('@/pages/reviewOpinion')
       },
       {
         path: '/reviewOpinion/detail',
@@ -64,7 +64,7 @@ const frameOut = [
         meta: {
           title: '填写审查意见'
         },
-        component: () => import('@/pages/review-opinion/detail')
+        component: () => import('@/pages/reviewOpinion/detail')
       },
       {
         path: '/reviewReport',
@@ -72,7 +72,7 @@ const frameOut = [
         meta: {
           title: '审查报告管理'
         },
-        component: () => import('@/pages/review-report')
+        component: () => import('@/pages/reviewReport')
       },
       {
         path: '/reviewReport/detail',
@@ -80,7 +80,7 @@ const frameOut = [
         meta: {
           title: '审查报告管理'
         },
-        component: () => import('@/pages/review-report/detail')
+        component: () => import('@/pages/reviewReport/detail')
       },
       {
         path: '/reviewCenter',
@@ -88,18 +88,18 @@ const frameOut = [
         meta: {
           title: '业务审批中心'
         },
-        component: () => import('@/pages/review-center')
+        component: () => import('@/pages/reviewCenter')
       }
     ]
   },
   {
     path: '/reviewSet',
     name: 'reviewSet',
-    redirect: 'reviewSet/reviewRole',
+    redirect: '/reviewSet/reviewProcess',
     meta: {
       title: '系统基础设置'
     },
-    component: () => import('@/pages/review-set'),
+    component: () => import('@/pages/reviewSet'),
     children: [
       {
         path: '/reviewSet/reviewProcess',
@@ -107,7 +107,7 @@ const frameOut = [
         meta: {
           title: '审批流程管理'
         },
-        component: () => import('@/pages/review-set/review-process')
+        component: () => import('@/pages/reviewSet/reviewProcess')
       },
       {
         path: '/reviewSet/reviewReceive',
@@ -115,7 +115,7 @@ const frameOut = [
         meta: {
           title: '审批流程管理'
         },
-        component: () => import('@/pages/review-set/review-receive')
+        component: () => import('@/pages/reviewSet/reviewReceive')
       },
       {
         path: '/reviewSet/reviewRole',
@@ -123,7 +123,7 @@ const frameOut = [
         meta: {
           title: '审批角色设置'
         },
-        component: () => import('@/pages/review-set/review-role')
+        component: () => import('@/pages/reviewSet/reviewRole')
       },
       {
         path: '/reviewSet/reviewDepartment',
@@ -131,7 +131,7 @@ const frameOut = [
         meta: {
           title: '审批角色设置'
         },
-        component: () => import('@/pages/review-set/review-department')
+        component: () => import('@/pages/reviewSet/reviewDepartment')
       }
     ]
   },

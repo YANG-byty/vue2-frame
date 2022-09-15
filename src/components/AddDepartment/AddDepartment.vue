@@ -53,13 +53,7 @@
     <!-- 部门选择 -->
     <select-org v-model="isSelectOrg" @setOrgData="getOrgData"></select-org>
     <!-- 人员选择 -->
-    <select-user
-      v-model="isSelectUser"
-      currentTitle="人员选择"
-      @setDataList="getUserList"
-      :userList="userListFlag"
-      @resetDataList="resetDataList"
-    />
+    <select-user v-model="isSelectUser" currentTitle="人员选择" @setDataList="getUserList" />
   </div>
 </template>
 
@@ -111,21 +105,16 @@ export default {
       // 已选部门
       orgList: [],
       // 已选人员
-      userList: [],
-      userListFlag: []
+      userList: []
     };
   },
   methods: {
-    resetDataList(data) {
-      this.userListFlag = data;
-    },
     // 选择部门点击
     handleSelectOrg() {
       this.isSelectOrg = true;
     },
     // 选择人员点击
     handleSelectUser() {
-      this.userListFlag = this.userList;
       this.isSelectUser = true;
     },
     // 获取已选部门
@@ -214,12 +203,6 @@ export default {
           this.orgInfo.userList.forEach((item) => {
             this.userList.push({
               id: item.uid,
-              userId: item.uid,
-              nickName: item.userName
-            });
-            this.userListFlag.push({
-              id: item.uid,
-              userId: item.uid,
               nickName: item.userName
             });
           });

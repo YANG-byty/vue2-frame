@@ -15,15 +15,14 @@ import 'view-design/dist/styles/iview.css';
 import '@/assets/css/common.less';
 import '@/assets/css/iconfont.css';
 import { Tree, Select, Option, Input } from 'element-ui';
-// 回显
-import { enumConversion, getUserId, getUserName } from '@/libs/util';
 Vue.use(Tree);
 Vue.use(Input);
 Vue.use(Select);
 Vue.use(Option);
+// 回显
+import { enumConversion, getUserId } from '@/libs/util';
 Vue.prototype.enumConversion = enumConversion;
 Vue.prototype.$getUserId = getUserId;
-Vue.prototype.$getUserName = getUserName;
 Vue.use(Directive);
 
 Vue.use(ViewUI, {});

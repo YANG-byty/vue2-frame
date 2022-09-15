@@ -28,6 +28,11 @@ export const iconEnumList = [
  * */
 export const taskStatusEnumList = [
   {
+    value: 2,
+    label: '进行中',
+    class: 'blue'
+  },
+  {
     value: 0,
     label: '已作废',
     class: 'red'
@@ -37,11 +42,7 @@ export const taskStatusEnumList = [
     label: '待分发',
     class: 'yellow'
   },
-  {
-    value: 2,
-    label: '进行中',
-    class: 'blue'
-  },
+
   {
     value: 3,
     label: '已结束',
@@ -70,21 +71,6 @@ export const auditResultEnumList = [
   {
     value: 3,
     label: '已通过',
-    class: 'green'
-  }
-];
-/**
- *  审核流程枚举
- * */
-export const auditProcessEnumList = [
-  {
-    value: 1,
-    label: '审核中',
-    class: 'blue'
-  },
-  {
-    value: 2,
-    label: '已结束',
     class: 'green'
   }
 ];
